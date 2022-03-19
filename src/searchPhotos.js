@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createApi } from 'unsplash-js';
+import axios from 'axios';
 
 const unsplash = createApi({ accessKey: '2Vx2suOcOjZrVDZCZjeexAU8p5Q2jqSIN0cvwpnfg8U' });
 
@@ -14,11 +15,18 @@ export default function SearchPhotos() {
     var transcript = "";
 
     const searchPhotos = async (e) => {
-        e.preventDefault();
-        unsplash.search.getPhotos({
+      axios.get(`https://8n1ydxze30.execute-api.us-east-1.amazonaws.com/dev/search?q=${query}`)
+      .then(function(result){
+          console.log(result);
+          setPics(result.data)
+      })
+      e.preventDefault();
+      unsplash.search.getPhotos({
             query: query
-          }).then(result=>{setPics(result.response.results)})
-      };
+          }).then(function(result){
+            console.log(result);
+        })
+    };
 
     const start = async (ev) => {
       recognition.start();    
@@ -69,8 +77,8 @@ export default function SearchPhotos() {
                         <div className="card" key={pic.id}>
                             <img
                                 className="card--image"
-                                alt={pic.alt_description}
-                                src={pic.urls.small}
+                                alt=""
+                                src={pic.url}
                                 width="50%"
                                 height="50%"
                             ></img>
