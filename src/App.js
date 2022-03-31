@@ -7,7 +7,7 @@ function App() {
     
     <div className="App">
      <div className="container">
-        <h1 className="title">Cloud Computing and Big Data HW2</h1>
+        <h1 className="title">Cloud Computing and Big Data HW3</h1>
         <UploadPhotos/>
         <br/>
         <SearchPhotos/>
